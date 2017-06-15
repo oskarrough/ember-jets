@@ -1,3 +1,5 @@
+<p>This is a demo of the <a href="https://github.com/oskarrough/ember-jets">ember-jets</a> addon.</p>
+
 {{jets-search
   contentTag=".jets-content"
   content=items
@@ -6,8 +8,7 @@
 <ul class="jets-content">
   {{#each items as |item|}}
     <li>
-      {{#text-italic}}JETS{{/text-italic}}
-      <h1>{{item}}</h1>
+      {{item}} - {{#text-italic}}test{{/text-italic}}
     </li>
   {{/each}}
 </ul>

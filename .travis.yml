@@ -3,11 +3,18 @@ language: node_js
 node_js:
   - "6"
 
-sudo: false
+sudo: required
+dist: trusty
 
 cache:
-  directories:
-    - $HOME/.npm
+  yarn: true
+
+addons:
+  apt:
+    sources:
+    - google-chrome
+    packages:
+    - google-chrome-stable
 
 env:
   # we recommend testing LTS's and latest stable release (bonus points to beta/canary)
@@ -29,7 +36,7 @@ before_install:
   - phantomjs --version
 
 install:
-  - npm install
+  - yarn install
 
 script:
   # Usually, it's ok to finish the test scenario without reverting

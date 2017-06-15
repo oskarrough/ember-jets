@@ -1,11 +1,12 @@
 import Ember from 'ember'
 import layout from '../templates/components/jets-search'
-// import 'jets'
 
 const {Component, get} = Ember
 
 export default Component.extend({
   layout,
+
+  searchValue: '',
 
   // Selector for content tag using `document.querySelector`.
   // contentTag: '',
