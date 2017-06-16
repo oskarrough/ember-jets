@@ -1,9 +1,14 @@
 # ember-jets
 
-An Ember.js component for using [Jets.js](https://jets.js.org) to search lists inline using CSS. 
+[![Build Status](https://travis-ci.org/oskarrough/ember-jets.svg?branch=master)](https://travis-ci.org/oskarrough/ember-jets) 
 
-Install it with `ember install ember-jets`. Now you'll have a `{{jets-search}}` input component available. Use it like this:
+An Ember.js component to search and filter lists with CSS inline using [Jets.js](https://jets.js.org). Here's a [demo](https://ember-jets.netlify.com/).
 
+## Usage
+
+Inside your ember-cli project, run `ember install ember-jets`.
+
+Now you have a `{{jets-search}}` input component. Use it like this:
 
 ```hbs
 {{jets-search contentTag="#list" content=model}}
@@ -17,7 +22,13 @@ Install it with `ember install ember-jets`. Now you'll have a `{{jets-search}}` 
 </div>
 ```
 
-By default, Jets will figure out what text to search. But you can also pass a CSS selector as `filter` to explicitly define which text to search in each row. Here's an example:
+### Options
+
+- `contentTag` - CSS selector to the DOM container you want to search (required)
+- `content` - Array to observe for changes. This will make sure the search is synced with your content (optional)
+- `filter` - CSS selector if you want to specify what to search in each row (optional)
+
+Here's an example with filtering:
 
 ```hbs
 {{jets-search contentTag="#list" items=model filter="h1"}}
@@ -32,27 +43,27 @@ By default, Jets will figure out what text to search. But you can also pass a CS
 </div>
 ```
 
+## Collaborating
+
 The below outlines the details of collaborating on this Ember addon.
 
-## Installation
+### Installation
 
 * `git clone <repository-url>` this repository
 * `cd ember-jets`
-* `npm install`
+* `yarn install`
 
-## Running
+### Running
 
 * `ember serve`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
-## Running Tests
+### Running Tests
 
 * `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
 * `ember test`
 * `ember test --server`
 
-## Building
+### Building
 
 * `ember build`
-
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
