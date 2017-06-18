@@ -15,6 +15,7 @@ export default TextField.extend({
   // content: []
 
   // Optional array to observe for changes. Helps keep the search in sync.
+  // content: []
 
   options: {
     callSearchManually: true
@@ -55,7 +56,7 @@ export default TextField.extend({
     if (this.jets) this.jets.destroy()
   },
 
-  keyUp() {
+  input() {
     this._super(...arguments)
     const wait = get(this, 'wait')
     const value = get(this, 'value')

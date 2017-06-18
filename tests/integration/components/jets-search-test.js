@@ -33,7 +33,7 @@ test('it can search', function (assert) {
   this.set('searchValue', 'c')
   assert.equal(this.$('input').val(), 'c', 'can pass search value')
 
-  this.$('input').trigger('keyup')
+  this.$('input').trigger('input')
   return wait().then(() => {
     assert.equal(this.$('li:visible').eq(0).text().trim(), 'c', 'it searches')
   })
