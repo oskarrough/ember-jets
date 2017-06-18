@@ -7,7 +7,7 @@ moduleForComponent('jets-search', 'Integration | Component | jets search', {
   integration: true
 })
 
-test('it renders', function (assert) {
+test('it can search', function (assert) {
   assert.expect(4)
 
   const list = ['a', 'b', 'c']
@@ -15,7 +15,7 @@ test('it renders', function (assert) {
   this.set('list', Ember.A(list))
 
   this.render(hbs`
-    {{jets-search searchValue=searchValue contentTag=".list"}}
+    {{jets-search value=searchValue contentTag=".list"}}
     <ul class="list">
       {{#each list as |item|}}
         <li>
