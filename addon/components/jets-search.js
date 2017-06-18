@@ -1,12 +1,12 @@
 import Ember from 'ember'
-import layout from '../templates/components/jets-search'
 
-const {Component, get} = Ember
+const {TextField, get, run} = Ember
 
-export default Component.extend({
-  layout,
+export default TextField.extend({
+  type: 'search',
 
-  searchValue: '',
+  // Time in MS to wait (debounce) the search.
+  wait: 60,
 
   // Selector for content tag using `document.querySelector`.
   // contentTag: '',
@@ -14,8 +14,8 @@ export default Component.extend({
   // Optional array to observe for changes. Helps keep the search in sync.
   // content: []
 
-  // Time in MS to wait (debounce) the search.
-  wait: 60,
+  // Optional array to observe for changes. Helps keep the search in sync.
+  // content: []
 
   options: {
     callSearchManually: true
@@ -56,14 +56,11 @@ export default Component.extend({
     if (this.jets) this.jets.destroy()
   },
 
-  _search(query) {
-    if (this.jets) this.jets.search(query)
-  },
-
-  actions: {
-    runSearch(query) {
-      const wait = get(this, 'wait')
-      Ember.run.debounce(this, this._search, query, wait)
-    }
+  input() {
+    this._super(...arguments)
+    const wait = get(this, 'wait')
+    const value = get(this, 'value')
+    if (!this.jets) return
+    run.debounce(this, this.jets.search, value, wait)
   }
 })
