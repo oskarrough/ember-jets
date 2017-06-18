@@ -8,7 +8,7 @@ moduleForComponent('jets-search', 'Integration | Component | jets search', {
 })
 
 test('it can search', function (assert) {
-  assert.expect(4)
+  assert.expect(5)
 
   const list = ['a', 'b', 'c']
 
@@ -24,6 +24,8 @@ test('it can search', function (assert) {
       {{/each}}
     </ul>
   `)
+
+  assert.equal(this.$('input').attr('type'), 'search')
 
   assert.equal(this.$('li:first').text().trim(), 'a')
   assert.equal(this.$('.list li').length, list.length, 'all results rendered')

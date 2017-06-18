@@ -3,14 +3,18 @@ import Ember from 'ember'
 const {TextField, get, run} = Ember
 
 export default TextField.extend({
+  type: 'search',
+
+  // Time in MS to wait (debounce) the search.
+  wait: 60,
+
   // Selector for content tag using `document.querySelector`.
   // contentTag: '',
 
   // Optional array to observe for changes. Helps keep the search in sync.
   // content: []
 
-  // Time in MS to wait (debounce) the search.
-  wait: 60,
+  // Optional array to observe for changes. Helps keep the search in sync.
 
   options: {
     callSearchManually: true
