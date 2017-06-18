@@ -1,6 +1,6 @@
 {
   "name": "ember-jets",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "An ember-cli addon for Jets.js search",
   "keywords": [
     "ember-addon",
