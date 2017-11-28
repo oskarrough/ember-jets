@@ -8,16 +8,18 @@ export default TextField.extend({
   // Time in MS to wait (debounce) the search.
   wait: 60,
 
-  // Selector for content tag using `document.querySelector`.
+  // Required selector for content tag. Refers to document.querySelectorAll() so many lists can be processed at one time.
   // contentTag: '',
+  
+   // Optional selector for filtering which elements to search inside the `contentTag` selector.
+  // filter: ''
 
   // Optional array to observe for changes. Helps keep the search in sync.
   // content: []
-
-  // Optional array to observe for changes. Helps keep the search in sync.
-  // content: []
-
+  
+  // Options for jets.js. You can pass in an `options` object to override it.
   options: {
+    // Disabled auto searching and allows us to do it via Ember events.
     callSearchManually: true
   },
 
