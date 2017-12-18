@@ -24,9 +24,10 @@ Now you have a `{{jets-search}}` input component. Use it like this:
 
 ### Options
 
-- `contentTag` - CSS selector to the DOM container you want to search (required)
-- `content` - Array to observe for changes. This will make sure the search is synced with your content (optional)
+- `contentTag` - CSS selector for the DOM container you want to search (required)
+- `content` - Array to observe for changes. For instance your model array. This will make sure the search is synced with your content (optional)
 - `filter` - CSS selector if you want to specify what to search in each row (optional)
+- `wait` number in milliseconds to debounce/wait before triggering search (optional, not enabled by default)
 
 Here's an example with filtering:
 

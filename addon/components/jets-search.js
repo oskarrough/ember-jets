@@ -6,17 +6,17 @@ export default TextField.extend({
   type: 'search',
 
   // Time in MS to wait (debounce) the search.
-  wait: 60,
+  wait: 0,
 
   // Required selector for content tag. Refers to document.querySelectorAll() so many lists can be processed at one time.
   // contentTag: '',
-  
+
    // Optional selector for filtering which elements to search inside the `contentTag` selector.
   // filter: ''
 
   // Optional array to observe for changes. Helps keep the search in sync.
   // content: []
-  
+
   // Options for jets.js. You can pass in an `options` object to override it.
   options: {
     // Disabled auto searching and allows us to do it via Ember events.
@@ -28,15 +28,15 @@ export default TextField.extend({
 
     if (!window.Jets) throw new Error('The Jets.js module is missing')
 
-    const options = get(this, 'options')
     const contentTag = get(this, 'contentTag')
     const filter = get(this, 'filter')
+    const options = get(this, 'options')
 
     // Set dynamic contentTag option.
     if (!contentTag) throw new Error('Missing "contentTag" property on {{jets-search}}')
     options.contentTag = contentTag
 
-    // If a searchSelector is set, use it to parse the 'text' for the search.
+    // If a "filter" selector is set, use it to parse the 'text' for the search.
     if (filter) {
       options.manualContentHandling = function (tag) {
         tag = tag.querySelector(filter)
@@ -63,6 +63,10 @@ export default TextField.extend({
     const wait = get(this, 'wait')
     const value = get(this, 'value')
     if (!this.jets) return
-    run.debounce(this, this.jets.search, value, wait)
+    if (wait) {
+      run.debounce(this, this.jets.search, value, wait, true)
+    } else {
+      this.jets.search(value)
+    }
   }
 })
