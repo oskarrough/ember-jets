@@ -1,6 +1,6 @@
 {
   "name": "ember-jets",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "An ember-cli addon for Jets.js search",
   "keywords": [
     "ember-addon",
@@ -47,6 +47,6 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
-     "demoURL": "https://ember-jets.netlify.com"
+    "demoURL": "https://ember-jets.netlify.com"
   }
 }
