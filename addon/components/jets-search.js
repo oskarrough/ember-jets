@@ -1,6 +1,6 @@
 import Ember from 'ember'
 
-const {TextField, get, run} = Ember
+const { TextField, get, run } = Ember
 
 export default TextField.extend({
   type: 'search',
@@ -11,7 +11,7 @@ export default TextField.extend({
   // Required selector for content tag. Refers to document.querySelectorAll() so many lists can be processed at one time.
   // contentTag: '',
 
-   // Optional selector for filtering which elements to search inside the `contentTag` selector.
+  // Optional selector for filtering which elements to search inside the `contentTag` selector.
   // filter: ''
 
   // Optional array to observe for changes. Helps keep the search in sync.
@@ -31,16 +31,18 @@ export default TextField.extend({
     const contentTag = get(this, 'contentTag')
     const filter = get(this, 'filter')
     const options = get(this, 'options')
+    const value = get(this, 'value')
 
     // Set dynamic contentTag option.
-    if (!contentTag) throw new Error('Missing "contentTag" property on {{jets-search}}')
+    if (!contentTag)
+      throw new Error('Missing "contentTag" property on {{jets-search}}')
     options.contentTag = contentTag
 
     // If a "filter" selector is set, use it to parse the 'text' for the search.
     if (filter) {
-      options.manualContentHandling = function (tag) {
+      options.manualContentHandling = function(tag) {
         tag = tag.querySelector(filter)
-        return tag && (tag.innerText || tag.textContent) || '';
+        return (tag && (tag.innerText || tag.textContent)) || ''
       }
     }
 
@@ -48,12 +50,16 @@ export default TextField.extend({
     this.jets = new window.Jets(options)
 
     // Make an initial search.
-    this.input()
+    if (value) this.input()
   },
 
   didRender() {
     this._super(...arguments)
     if (this.jets) this.jets.update()
+
+    // If value is empty, make sure we reset to show all results.
+    const value = get(this, 'value')
+    if (value === '') this.jets.search()
   },
 
   willDestroyElement() {
