@@ -25,7 +25,7 @@ test('it can search', function (assert) {
     </ul>
   `)
 
-  assert.equal(this.$('input').attr('type'), 'search')
+  assert.equal(this.$('input').attr('type'), 'search', 'it is a search input')
 
   assert.equal(this.$('li:first').text().trim(), 'a')
   assert.equal(this.$('.list li').length, list.length, 'all results rendered')
@@ -34,6 +34,25 @@ test('it can search', function (assert) {
   assert.equal(this.$('input').val(), 'c', 'can pass search value')
 
   this.$('input').trigger('input')
+  return wait().then(() => {
+    assert.equal(this.$('li:visible').eq(0).text().trim(), 'c', 'it searches')
+  })
+})
+
+test('if a value is passed, search is updated on load', function (assert) {
+  const list = ['a', 'b', 'c']
+  this.set('searchValue', 'c')
+  this.set('list', Ember.A(list))
+  this.render(hbs`
+    {{jets-search value=searchValue contentTag=".list"}}
+    <ul class="list">
+      {{#each list as |item|}}
+        <li>
+          {{item}}
+        </li>
+      {{/each}}
+    </ul>
+  `)
   return wait().then(() => {
     assert.equal(this.$('li:visible').eq(0).text().trim(), 'c', 'it searches')
   })

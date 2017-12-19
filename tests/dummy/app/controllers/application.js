@@ -1,6 +1,7 @@
 import Ember from 'ember'
 
 export default Ember.Controller.extend({
+  query: 'bats',
   init() {
     this._super(...arguments)
     this.set('items', Ember.A(ITEMS))

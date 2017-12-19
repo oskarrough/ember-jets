@@ -46,6 +46,9 @@ export default TextField.extend({
 
     // Create and save Jets instance.
     this.jets = new window.Jets(options)
+
+    // Make an initial search.
+    this.input()
   },
 
   didRender() {
