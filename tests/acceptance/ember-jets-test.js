@@ -1,35 +1,25 @@
-import { test } from 'qunit'
-import moduleForAcceptance from '../../tests/helpers/module-for-acceptance'
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
+import {visit, findAll, fillIn} from '@ember/test-helpers'
+import $ from 'jquery'
 
-moduleForAcceptance('Acceptance | ember jets')
+const input = '[type="search"]'
+const firstResult = () => $('ul.jets-content li:visible')[0].textContent.trim()
 
-test('visiting /', function(assert) {
-  visit('/')
-  // // click('button.submit')
-  andThen(() => {
-    assert.equal(find('ul.jets-content li:first').text().trim(), 'ants - test')
+module('Acceptance | ember jets', function(hooks) {
+  setupApplicationTest(hooks);
+
+  test('list is rendered', async function(assert) {
+    await visit('/')
+    assert.equal(findAll('ul.jets-content li')[0].textContent.trim(), 'ants - test')
+  })
+
+  test('searching works', async function(assert) {
+    await visit('/')
+    await fillIn(input, 'fox')
+    assert.equal(firstResult(), 'foxes - test')
+    await fillIn(input, 'bat')
+    assert.equal(firstResult(), 'bats - test')
   })
 })
 
-// test('visiting /', function(assert) {
-//   assert.expect(2)
-
-//   visit('/')
-
-//   const input = 'input[type="search"]'
-//   const list = 'ul.jets-content li:first'
-
-//   fillIn(input, 'fox') // does not trigger search in test environment
-//   andThen(() => {
-//     console.log(find(input).val())
-//     assert.equal(find(list).text().trim(), 'ants - test')
-
-//     find(input).trigger('keyup') // triggers search
-//     andThen(() => {
-//       assert.equal(find(list).text().trim(), 'foxes - test')
-//       andThen(() => {
-//         assert.equal(find(list).text().trim(), 'foxes - test')
-//       })
-//     })
-//   })
-// })

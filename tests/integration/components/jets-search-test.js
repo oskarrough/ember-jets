@@ -1,59 +1,58 @@
-import { moduleForComponent, test } from 'ember-qunit'
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile'
-import Ember from 'ember'
-import wait from 'ember-test-helpers/wait'
 
-moduleForComponent('jets-search', 'Integration | Component | jets search', {
-  integration: true
-})
+const list = ['a', 'b', 'c']
 
-test('it can search', function (assert) {
-  assert.expect(5)
+module('Integration | Component | jets search', function(hooks) {
+  setupRenderingTest(hooks);
 
-  const list = ['a', 'b', 'c']
+  test('it can search', async function(assert) {
+    assert.expect(5)
 
-  this.set('list', Ember.A(list))
+    this.set('list', list)
 
-  this.render(hbs`
-    {{jets-search value=searchValue contentTag=".list"}}
-    <ul class="list">
-      {{#each list as |item|}}
-        <li>
-          {{item}}
-        </li>
-      {{/each}}
-    </ul>
-  `)
+    await render(hbs`
+      {{jets-search value=searchValue contentTag=".list"}}
+      <ul class="list">
+        {{#each list as |item|}}
+          <li>
+            {{item}}
+          </li>
+        {{/each}}
+      </ul>
+    `)
 
-  assert.equal(this.$('input').attr('type'), 'search', 'it is a search input')
+    assert.equal(this.$('input').attr('type'), 'search', 'it is a search input')
 
-  assert.equal(this.$('li:first').text().trim(), 'a')
-  assert.equal(this.$('.list li').length, list.length, 'all results rendered')
+    assert.equal(this.$('li:first').text().trim(), 'a')
+    assert.equal(this.$('.list li').length, list.length, 'all results rendered')
 
-  this.set('searchValue', 'c')
-  assert.equal(this.$('input').val(), 'c', 'can pass search value')
+    this.set('searchValue', 'c')
+    assert.equal(this.$('input').val(), 'c', 'can pass search value')
 
-  this.$('input').trigger('input')
-  return wait().then(() => {
-    assert.equal(this.$('li:visible').eq(0).text().trim(), 'c', 'it searches')
+    this.$('input').trigger('input')
+    return settled().then(() => {
+      assert.equal(this.$('li:visible').eq(0).text().trim(), 'c', 'it searches')
+    });
   })
-})
 
-test('if a value is passed, search is updated on load', function (assert) {
-  const list = ['a', 'b', 'c']
-  this.set('searchValue', 'c')
-  this.set('list', Ember.A(list))
-  this.render(hbs`
-    {{jets-search value=searchValue contentTag=".list"}}
-    <ul class="list">
-      {{#each list as |item|}}
-        <li>
-          {{item}}
-        </li>
-      {{/each}}
-    </ul>
-  `)
-  return wait().then(() => {
-    assert.equal(this.$('li:visible').eq(0).text().trim(), 'c', 'it searches')
+  test('if a value is passed, search is updated on load', async function(assert) {
+    this.set('searchValue', 'c')
+    this.set('list', list)
+    await render(hbs`
+      {{jets-search value=searchValue contentTag=".list"}}
+      <ul class="list">
+        {{#each list as |item|}}
+          <li>
+            {{item}}
+          </li>
+        {{/each}}
+      </ul>
+    `)
+    return settled().then(() => {
+      assert.equal(this.$('li:visible').eq(0).text().trim(), 'c', 'it searches')
+    });
   })
-})
+});

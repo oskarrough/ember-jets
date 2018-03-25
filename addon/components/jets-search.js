@@ -1,6 +1,6 @@
-import Ember from 'ember'
-
-const { TextField, get, run } = Ember
+import TextField from '@ember/component/text-field'
+import {get, set} from '@ember/object'
+import {run} from '@ember/runloop'
 
 export default TextField.extend({
   type: 'search',
@@ -16,11 +16,15 @@ export default TextField.extend({
 
   // Optional array to observe for changes. Helps keep the search in sync.
   // content: []
+  //
+  init() {
+    this._super()
 
-  // Options for jets.js. You can pass in an `options` object to override it.
-  options: {
-    // Disabled auto searching and allows us to do it via Ember events.
-    callSearchManually: true
+    // Options for jets.js. You can pass in an `options` object to override it.
+    set(this, 'options', {
+      // Disabled auto searching and allows us to do it via Ember events.
+      callSearchManually: true
+    })
   },
 
   didInsertElement() {
