@@ -1,6 +1,6 @@
 # ember-jets
 
-[![Build Status](https://travis-ci.org/oskarrough/ember-jets.svg?branch=master)](https://travis-ci.org/oskarrough/ember-jets) 
+[![Build Status](https://travis-ci.org/oskarrough/ember-jets.svg?branch=master)](https://travis-ci.org/oskarrough/ember-jets)
 
 An Ember.js component to search and filter lists with CSS inline using [Jets.js](https://jets.js.org). Here's a [demo](https://ember-jets.netlify.com/).
 
@@ -56,15 +56,21 @@ The below outlines the details of collaborating on this Ember addon.
 
 ### Running
 
+ * `ember serve`
+ * Visit your app at [http://localhost:4200](http://localhost:4200).
+
+ ### Linting
+
+* `npm run lint:js`
+* `npm run lint:js -- --fix`
+
+### Running tests
+
+* `ember test` – Runs the test suite on the current Ember version
+* `ember test --server` – Runs the test suite in "watch mode"
+* `npm test` – Runs `ember try:each` to test your addon against multiple Ember versions
+
+### Running the demo/dummy application
+
 * `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-
-### Running Tests
-
-* `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
-
-### Building
-
-* `ember build`
+* Visit the dummy application at [http://localhost:4200](http://localhost:4200).
