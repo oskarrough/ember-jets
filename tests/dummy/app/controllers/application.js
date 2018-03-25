@@ -1,10 +1,11 @@
-import Ember from 'ember'
+import Controller from '@ember/controller';
+import {A} from '@ember/array'
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   query: 'bats',
   init() {
     this._super(...arguments)
-    this.set('items', Ember.A(ITEMS))
+    this.set('items', A(ITEMS))
   }
 })
 
